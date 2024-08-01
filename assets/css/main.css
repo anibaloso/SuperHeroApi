@@ -1,0 +1,14 @@
+.logo{
+    height: 3rem;
+}
+
+.list-group-item{
+    list-style: none;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.img-hero{
+    height: 300px;
+    
+}
