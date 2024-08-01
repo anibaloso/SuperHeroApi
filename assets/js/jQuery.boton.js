@@ -16,12 +16,23 @@ jQuery.fn.boton = function () {
         let hero = response;
         let aliases = hero.biography.aliases
         let heroAliases = ''
-        let power = Number(hero.powerstats.power)
-        let combat = Number(hero.powerstats.combat)
-        let durability = Number(hero.powerstats.durability)
-        let speed = Number(hero.powerstats.speed)
-        let strength = Number(hero.powerstats.strength)
-        let intelligence = Number(hero.powerstats.intelligence)
+        // let power = Number(hero.powerstats.power) || 0
+        // let combat = Number(hero.powerstats.combat) || 0
+        // let durability = Number(hero.powerstats.durability) || 0
+        // let speed = Number(hero.powerstats.speed) || 0
+        // let strength = Number(hero.powerstats.strength) || 0
+        // let intelligence = Number(hero.powerstats.intelligence) || 0
+        let habilidades = []
+        for (const power in hero.powerstats) {
+            if (hero.powerstats[power] !== null) {
+                
+                habilidades.push({ y: Number(hero.powerstats[power]) || 0, name: power })
+            }else{
+                continue;
+            }
+        }
+        
+
 
         for (let i = 0; i < aliases.length; i++) {
             heroAliases += `${aliases[i]} `
@@ -68,21 +79,14 @@ jQuery.fn.boton = function () {
                 showInLegend: true,
                 toolTipContent: `{name}: ({y})`,
                 indexLabel: "{name} ({y})",
-                dataPoints: [
-                    { y: power, name: "power" },
-                    { y: combat, name: "combat" },
-                    { y: durability, name: "durability" },
-                    { y: speed, name: "speed" },
-                    { y: strength, name: "strength" },
-                    { y: intelligence, name: "intelligence" }
-                ]
+                dataPoints: habilidades,
             }]
         });
 
         // chart.render();
 
     });
-    
+
     return this
 
 }
